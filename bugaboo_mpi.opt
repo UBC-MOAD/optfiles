@@ -1,0 +1,23 @@
+#!/bin/bash
+#
+# $Name:  $
+
+#  tested on bugaboo.westgrid.ca
+
+FC=mpif90
+DEFINES='-DWORDLENGTH=4'
+CPP='/lib/cpp  -traditional -P'
+EXTENDED_SRC_FLAG='-132'
+
+INCLUDEDIRS="/usr/local/openmpi-1.6.4/include/intel/"
+INCLUDES="-I/usr/local/openmpi-1.6.4/include/intel/"
+LIBS=" -lnetcdff"
+
+NOOPTFILES='ini_cartesian_grid.F'
+NOOPTFLAGS='-O3'
+
+FFLAGS="$FFLAGS -w95 -W0 -WB -convert big_endian -assume byterecl"
+FOPTIM='-O3 -align -ip'
+#- might want to use '-r8' for fizhi pkg:
+#FFLAGS="$FFLAGS -r8"
+
