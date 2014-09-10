@@ -1,0 +1,38 @@
+#!/bin/bash
+#
+# $Header: /u/gcmpack/MITgcm/tools/build_options/darwin_amd64_gfortran,v 1.4 2013/07/22 18:40:45 jmc Exp $
+# $Name: $
+
+# Tested on Salish (salish.eos.ubc.ca)
+#-------
+# need to set NETCDF_ROOT to where the NetCDF is installed, e.g.:
+# export NETCDF_ROOT='/usr/NetCDF'
+# MPI : need to set environment variable MPI_INC_DIR to the include
+# directory of your MPI implementation
+
+CC=mpicc
+FC=mpif90
+
+DEFINES='-DWORDLENGTH=4 -DNML_TERMINATOR'
+CPP='/usr/bin/cpp -P -traditional'
+EXTENDED_SRC_FLAG='-132'
+
+
+INCLUDEDIRS="/usr/include /usr/include/mpi "
+INCLUDES="-I/usr/lib"
+LIBS=" -lnetcdff"
+
+
+
+MPI_INC_DIR='/usr/lib/openmpi'
+
+
+INCLUDES="$INCLUDES -I$MPI_INC_DIR"
+INCLUDEDIRS="$INCLUDEDIRS $MPI_INC_DIR"
+#- used for parallel (MPI) DIVA
+MPIINCLUDEDIR="$MPI_INC_DIR"
+#MPI_HEADER_FILES='mpif.h mpiof.h'
+
+NOOPTFILES="ini_cartesian_grid.F"
+NOOPTFLAGS="-O3"
+FFLAGS="$FFLAGS -fconvert=big-endian -fimplicit-none"
