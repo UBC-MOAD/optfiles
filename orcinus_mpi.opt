@@ -1,0 +1,30 @@
+#!/bin/bash
+#
+# MITgcm genmake2 build options for orcinus.westgrid.ca
+
+# The following module load commands must be run here,
+# and also at the command-line before running make:
+module load intel
+module load intel/14.0/netcdf_hdf5
+
+
+CC=mpicc
+FC=mpif90
+LINK="$FC -shared-intel"
+
+DEFINES='-DWORDLENGTH=4'
+CPP='cpp -traditional -P'
+EXTENDED_SRC_FLAG='-132'
+GET_FC_VERSION="--version"
+
+NETCDF_ROOT="/global/software/lib64/intel/ncsa-tools"
+MPI_ROOT="/global/software/openmpi-1.6.5/intel"
+INCLUDEDIRS="${NETCDF_ROOT}/include"
+INCLUDES="-I${NETCDF_ROOT}/include -I${MPI_ROOT}/include"
+LIBS="-L${NETCDF_ROOT}/lib -lnetcdf -lnetcdff -L${MPI_ROOT}/lib64"
+
+NOOPTFLAGS='-O0'
+
+FFLAGS="$FFLAGS -W0 -WB -convert big_endian -assume byterecl"
+FOPTIM='-O3 -align -ip'
+
